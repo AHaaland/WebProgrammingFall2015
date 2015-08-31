@@ -1,0 +1,32 @@
+nav ul{
+	padding: 0 20px;
+	list-style: none;
+	position: relative;
+	display: inline-table;
+	background:#C0C0C0;
+}
+nav ul ul {	
+	padding: 0;
+	display:none;
+	position: absolute; 
+}
+nav ul li:hover > ul {
+	display: block;
+}
+
+nav ul li a {
+		display: block; 
+		padding: 25px 40px;
+		color: #fff; 
+		text-decoration: none;
+	}
+nav ul li{
+	float:left;
+	position:relative;
+}
+nav ul li:hover{
+	background: #669999;
+}
+nav ul li: hover a{
+	color: #fff;
+}
