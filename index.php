@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
   </head>
   <body>
     <div class="container">
@@ -71,7 +72,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(".progress-bar").animate({width: "75%"}, 2000);
-    </script>
+          (function(){
+          $(".progress-bar").animate({width: $(".progress").width() *.75});
+          //local scope
+          SomeName = function(){ 
+          //var intendedWidth = $(".progress-bar").width() *.75;
+          $(".progress-bar").animate({width: MyObject.intendedWidth}, 2000);
+          }
+        
+          })
+          var MyObject = {
+            hello: "world", intendedWidth: $(".progress-bar").width()* .75
+          };
+          SomeName();
+        
+       // setTimeout(SomeName, 100);
+       </script>
   </body>
 </html>
