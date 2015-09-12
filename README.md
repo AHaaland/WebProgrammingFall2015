@@ -12,3 +12,4 @@ Pages required:  Home page
                  A page to add exercise
                  A logout page?
                  A page to look at previous day(s) food and exercise
+Begining idea may need to add or subtract pages depending on how development goes.
