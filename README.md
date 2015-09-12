@@ -3,8 +3,8 @@ Web Programming 2015 Git Hub Repo
 <ul><li>Fit Tracker requirements:</li>
   <li>Needs to track food eaten.</li>
   <li>Needs to have a database that holds the food eaten for each person.</li>
-  <li>Needs to have a way to track exercise / subtract calories burned from the total calories.<li>
-  <li>Needs to allow registration of users, and work with multiple users on site.<li>
+  <li>Needs to have a way to track exercise / subtract calories burned from the total calories.</li>
+  <li>Needs to allow registration of users, and work with multiple users on site.</li>
   </ul>
   <ul>
 <li>Pages required:  Home page</li>
