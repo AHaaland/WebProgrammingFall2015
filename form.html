@@ -63,7 +63,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-    
+      (function($){
+        $(function(){
+          $("button").on('click', function(e){
+            var self = this;
+            //$(self).css({ display: "none"});
+            $(self).prop("disabled", true).html("Working...");
+            var per = 0;
+            var interval = setInterval(function(){
+              per += 5;
+              $(".progress-bar").css("width",per + "%");
+              //any span in progress bar
+              $(".progress-bar span").text(per);
+              if(per >= 100){
+                clearInterval(interval);
+                if( !$("#txtAmount").val() ){
+                $("input").css({ backgroundColor: "#FFAAAA"});
+                $(self).prop("disabled", false).html("Try Again");
+                }
+                else{
+                  // Display success
+                  $("form").prepend("<div class='alert alert-success'>Yay you did it!</div>")
+                }
+              }
+            }, 200);
+            return false;
+          });
+        });
+      })(jQuery);  
     </script>
   </body>
 </html>
