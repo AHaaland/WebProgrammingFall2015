@@ -29,7 +29,7 @@
           </ul>
           <div class="navbar-right">
               <p class="navbar-text ">Hello, Guest!</p>
-               <a href="#" class="btn btn-primary navbar-btn pull-left" role="button">Sign In</a>
+               <Button type="button" class="btn btn-primary navbar-btn pull-left" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
               <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
           </div>
           </div>
@@ -37,8 +37,8 @@
         </nav>
         <div class="container">
             <h1>Your Food!</h1>
-            <a href="#" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i>Add food!</a>
-            <a href="#" class="btn btn-danger"><i class ="glyphicon glyphicon-trash"></i> Delete food!</a>
+            <Button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModalFood"><i class ="glyphicon glyphicon-plus"></i>Add Food!</Button>
+            <Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModalFood"><i class ="glyphicon glyphicon-trash"></i> Delete Food!</Button>
             <table class="table table-striped table-hover">
  			<thead>
  				<tr>
@@ -61,7 +61,187 @@
  				</tr>
  			</tbody>
 		</table>
+		<Button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModalEx"><i class ="glyphicon glyphicon-plus"></i>Add Exercise!</Button>
+        <Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModalEx"><i class ="glyphicon glyphicon-trash"></i> Delete Exercise!</Button>
+		<table class="table table-striped table-hover">
+ 			<thead>
+ 				<tr>
+                  <th>Type of Exercise</th>
+                  <th>Calories Burned </th>
+                  <th>Date</th>
+                </tr>
+ 			</thead>
+ 			<tbody>
+ 				<tr>
+ 				    <th>Walking</th>
+ 				    <th>100</th>
+ 				    <th>9/19/15</th>
+ 				</tr>
+ 			</tbody>
+		</table>
         </div>
+        <!--MODAL LOGIN-->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+            <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+            </div>
+          </div>
+        </form>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Login</button>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!--MODAL LOGIN-->
+    <!--MODAL ADD Food-->
+     <div class="modal fade" id="addModalFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add Food!</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+            <div class="form-group">
+            <label for="inputFood" class="col-sm-2 control-label">Food Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtFood" placeholder="Food Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputCals" class="col-sm-2 control-label">Calories:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtCals" placeholder="Calories">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputFat" class="col-sm-2 control-label">Fat(g):</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtFat" placeholder="Fat">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputCarbs" class="col-sm-2 control-label">Carbohydrates(g):</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtCarbs" placeholder="Carbohydrates">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputFiber" class="col-sm-2 control-label">Fiber(g):</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtFiber" placeholder="Fiber">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputTime" class="col-sm-2 control-label">Date and time:</label>
+            <div class="col-sm-10">
+              <input type="Date" class="form-control" id="txtDT" placeholder="Date and Time">
+            </div>
+          </div>
+        </form>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <Button type="button" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i> Add</Button>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!--MODAL ADD Food-->
+    <!--MODAL RM Food-->
+    <div class="modal fade" id="delModalFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete item</h4>
+          </div>
+          <div class="modal-body">
+            ...
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+        </div>
+      </div>
+    </div>
+     <!--MODAL RM Food-->
+     <!--MODAL ADD Food-->
+     <div class="modal fade" id="addModalEx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add Exercise!</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputTime" class="col-sm-2 control-label">Date and time:</label>
+            <div class="col-sm-10">
+              <input type="Date" class="form-control" id="txtDT" placeholder="Date and Time">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputType" class="col-sm-2 control-label">Type of Exercise:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtTp" placeholder="Type of Exercise">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputType" class="col-sm-2 control-label">Calories Burned:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="txtCalBurn" placeholder="Calories Burned">
+            </div>
+          </div>
+        </form>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <Button type="button" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i> Add</Button>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!--MODAL ADD Food-->
+         <!--MODAL RM Food-->
+    <div class="modal fade" id="delModalEx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete item</h4>
+          </div>
+          <div class="modal-body">
+            ...
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+        </div>
+      </div>
+    </div>
+     <!--MODAL RM Food-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <footer>

@@ -29,8 +29,8 @@
           </ul>
           <div class="navbar-right">
               <p class="navbar-text ">Hello, Guest!</p>
-               <a href="#" class="btn btn-primary navbar-btn pull-left" role="button">Sign In</a>
-              <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
+               <Button type="button" class="btn btn-primary navbar-btn pull-left" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
+                <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
           </div>
           </div>
         </div>
@@ -38,7 +38,8 @@
         <div class="text-center jumbotron bg-img">
             <h1>Losing weight has never been easier than with FitFriend!!</h1>
             <h4>If you want to lose weight or keep track of your food, sign up for the easiest food tracker you will find on the net!</h4>
-            <a href="#" class="btn btn-primary" role="button">Sign In</a>
+            <Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
+            <a href="track.php" class="btn btn-primary" role="button">Tester Track Page</a>
             <a href="signup.php" class="btn btn-primary" role="button">Sign Up</a>
         </div>
         <div class="container">
@@ -64,8 +65,40 @@
             In feugiat nunc vel efficitur mollis. Nunc fringilla volutpat porta. Nam et semper diam. Mauris ut sapien feugiat, dignissim nunc sed, commodo lorem. Nam non blandit tortor. Suspendisse suscipit dapibus consequat. Ut mauris risus, gravida fringilla sem quis, faucibus rutrum dolor. Mauris id aliquam odio. Fusce sit amet ante aliquet, tincidunt velit cursus, rutrum ante. Nam a fermentum risus. Nulla volutpat vitae eros a rutrum. Pellentesque imperdiet sem interdum odio commodo, ut ultricies elit semper. Mauris porttitor enim et lorem lacinia, sit amet eleifend lacus fringilla.</p>
         </div>
         </div>
-        
         </div>
+        <!--MODAL LOGIN-->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+             
+            <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+            </div>
+          </div>
+        </form>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Login</button>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!--MODAL LOGIN-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <footer>

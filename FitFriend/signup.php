@@ -29,7 +29,7 @@
           </ul>
           <div class="navbar-right">
               <p class="navbar-text ">Hello, Guest!</p>
-              <a href="#" class="btn btn-primary navbar-btn pull-left" role="button">Sign In</a>
+              <Button type="button" class="btn btn-primary navbar-btn pull-left" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
               <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
           </div>
           </div>
@@ -38,7 +38,6 @@
         <div class="container">
         <div class="page-header">
           <h1>Sign up!</h1>
-        </div>
         <form class="form-horizontal">
             <div class="form-group">
             <label for="inputName" class="col-sm-2 control-label">Your Name</label>
@@ -64,7 +63,44 @@
               <input type="password" class="form-control" id="txtPassword" placeholder="Confirm Password">
             </div>
           </div>
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-success">Register</button>
+            <button type="button" class="btn btn-danger">Clear</button>
+          </div>
         </form>
+        <!--MODAL LOGIN-->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+             
+            <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+            </div>
+          </div>
+        </form>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Login</button>
+              </div>
+        </div>
+      </div>
+    </div>
+    <!--MODAL LOGIN-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <footer>
