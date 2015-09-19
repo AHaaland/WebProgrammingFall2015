@@ -36,9 +36,32 @@
         </div>
         </nav>
         <div class="container">
-            
+            <h1>Your Food!</h1>
+            <a href="#" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i>Add food!</a>
+            <a href="#" class="btn btn-danger"><i class ="glyphicon glyphicon-trash"></i> Delete food!</a>
+            <table class="table table-striped table-hover">
+ 			<thead>
+ 				<tr>
+                  <th>Food</th>
+                  <th>Calories</th>
+                  <th>Fat (g)</th>
+                  <th>Carbs (g)</th>
+                  <th>Fiber (g)</th>
+                  <th>Time</th>
+                </tr>
+ 			</thead>
+ 			<tbody>
+ 				<tr>
+ 				    <th>Name</th>
+ 				    <th>cals</th>
+ 				    <th>fat</th>
+ 				    <th>carbs</th>
+ 				    <th>fiber</th>
+ 				    <th>date</th>
+ 				</tr>
+ 			</tbody>
+		</table>
         </div>
-        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <footer>
