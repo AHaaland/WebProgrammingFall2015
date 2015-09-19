@@ -1,6 +1,19 @@
 .bg-img{
-   background:url(bg.jpg) no-repeat center;
+   background:linear-gradient(
+      rgba(0, 0, 0, 0.5), 
+      rgba(0, 0, 0, 0.5)
+    ),
+   url(bg.jpg) no-repeat center;
+   color:white;
+   height: 35em;
+   padding-top: 9em;
+   margin-bottom: 2em;
 }
-.container{
-    color:white;
+.jt{
+    height:50em;
+}
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
 }

@@ -12,7 +12,7 @@
         </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
+        <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -28,23 +28,17 @@
             <li><a href="#">About</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="text" class="form-control" placeholder="Password">
-          </div>
           <button type="submit" class="btn btn-success">Sign in</button>
-          <button type="button" class="btn btn-default">Sign Up</button>
           <button type="button" class="btn btn-primary">fb oAuth sign in</button>
            </form>
         </div>
       </div>
     </nav>
-        <div class="container bg-img">
-            <div class="row">
-                <div class="col-md-6">
-                  <h1>Losing weight has never been easier than with FitFriend!</h1>
-                </div>
-            </div>
+        <div class="text-center jumbotron bg-img">
+            <h1>Losing weight has never been easier than with FitFriend!!</h1>
+            <h4>If you want to lose weight or keep track of your food, sign up for the easiest food tracker you will find on the net!</h4>
+            <button type="submit" class="btn btn-primary center">Sign in</button>
+            <button type="button" class="btn btn-primary">Sign Up</button>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
