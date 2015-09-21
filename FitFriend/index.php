@@ -36,7 +36,7 @@
         </div>
         </nav>
         <div class="text-center jumbotron bg-img">
-            <h1>Losing weight has never been easier than with FitFriend!!</h1>
+            <h1>Losing weight has never been easier than with FitFriend!</h1>
             <h4>If you want to lose weight or keep track of your food, sign up for the easiest food tracker you will find on the net!</h4>
             <Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
             <a href="track.php" class="btn btn-primary" role="button">Tester Track Page</a>
