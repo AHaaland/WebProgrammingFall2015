@@ -1,18 +1,19 @@
-<?php
+<!--Certain servers you don't need to type php, just ? -->
+<?php 
     $name = 'Andrew Haaland';
-    $message = "Welcome $name";
+    $message = "Welcome, $name";
     
-    $person = array( 'Name' => $name, 'Age' => 20, CallorieGoal => 2000 );
+    $person = array('Name' => $name, 'Age' => 20, 'CalorieGoal' => 2000);
     
-    $food = array(
-        array( 'Name' => 'Breakfast', 'Time' => strtotime("-1 hour"), Callories => 400 ),
-        array( 'Name' => 'Lunch', 'Time' => strtotime("now"), Callories => 800 ),
-        array( 'Name' => 'Snack', 'Time' => strtotime("now + 1 hour"), Callories => 400 ),
-        array( 'Name' => 'Dinner', 'Time' => strtotime("6pm"), Callories => 400 ),
+    $food= array(
+        array('Name' => 'Breakfast', 'Time' => strtotime("-1 hour"), 'Calories' => 400, rank =>5),
+        array('Name' => 'Lunch', 'Time' => strtotime("now"), 'Calories' => 800, rank =>5),
+        array('Name' => 'Snack', 'Time' => strtotime("now + 1 hour"), 'Calories' => 400, rank =>5),
+        array('Name' => 'Dinner', 'Time' => strtotime("6pm"), 'Calories' => 600, rank =>5),
         );
     $total = 0;
-    foreach ($food as $meal) {
-        $total += $meal['Callories'];
+    foreach($food as $meal){
+        $total += $meal['Calories'];
     }
 ?>
 <!DOCTYPE html>
@@ -32,17 +33,35 @@
             <h1>Food Intake</h1>
             <h2><?=$message?></h2>
             <div class="panel panel-success">
-                <div class="panel-heading">Your Data</div>
+                <div class="panel-heading">
+                    Your Data
+                </div>
                 <div class="panel-body">
-                    <dl class="dl-horizontal">
-                        <dt>Name</dt>
-                        <dd><?=$person['Name']?></dd>
-                        <dt>Age</dt>
-                        <dd><?=$person['Age']?></dd>
-                        <dt>Goal</dt>
-                        <dd><?=$person['CallorieGoal']?></dd>
-                        <dt>Today's Intake</dt>
-                        <dd><?=$total?></dd>
+                    <dl>
+                        <dt>
+                            Name
+                        </dt>
+                        <dd>
+                            <?=$person['Name']?>
+                        </dd>
+                        <dt>
+                            Age
+                        </dt>
+                        <dd>
+                            <?=$person['Age']?>
+                        </dd>
+                        <dt>
+                            Calorie Goal
+                        </dt>
+                        <dd>
+                            <?=$person['CalorieGoal']?>
+                        </dd>
+                        <dt>
+                            Today's Intake
+                        </dt>
+                        <dd>
+                            <?=$total?>
+                        </dd>
                     </dl>
                 </div>
             </div>
@@ -60,19 +79,20 @@
             <table class="table table-condensed table-striped table-bordered table-hover">
               <thead>
                 <tr>
+                <?php $names = $food[0]; ?>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Time</th>
-                  <th>Callories</th>
+                  <? foreach($names as $key => $value): ?>
+                      <th><?=$key?></th>
+                  <? endforeach; ?>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach($food as $i => $meal): ?>
+                  <?php foreach($food as $i => $meal): ?>
                 <tr>
                   <th scope="row"><?=$i?></th>
                   <td><?=$meal['Name']?></td>
-                  <td><?=date("M d Y  h:i:sa", $meal['Time'])?></td>
-                  <td><?=$meal['Callories']?></td>
+                  <td><?=date("M d Y h:i:sa",$meal['Time'])?></td>
+                  <td><?=$meal['Calories']?></td>
                 </tr>
                 <?php endforeach; ?>
               </tbody>
@@ -86,7 +106,7 @@
             <div class="alert alert-danger" role="alert">
                 Oh no! You messed up.
             </div>
-
+          
         </div>
       </div>
       
