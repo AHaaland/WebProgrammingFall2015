@@ -1,16 +1,20 @@
 <?php
+session_start();
     $name = 'Andrew Haaland';
     $message = "Welcome $name";
     
     $person = array( 'Name' => $name, 'Age' => 20, CallorieGoal => 2000 );
     
-    $food = array(
+    $food = $_SESSION['food'];
+    if(!$food){
+      $_SESSION['food']=$food = array(
         array( 'Name' => 'Breakfast', 'Time' => strtotime("-1 hour"), Callories => 400 ),
         array( 'Name' => 'Lunch', 'Time' => strtotime("now"), Callories => 800 ),
         array( 'Name' => 'Snack', 'Time' => strtotime("now + 1 hour"), Callories => 400 ),
         array( 'Name' => 'Dinner', 'Time' => strtotime("6pm"), Callories => 400 ),
         );
-    $food[] = $_REQUEST;
+    }
+
     $total = 0;
     foreach ($food as $meal) {
         $total += $meal['Callories'];
@@ -57,8 +61,9 @@
             <a href="#" class="btn btn-danger">
                 <i class="glyphicon glyphicon-trash"></i>
                 Delete All
-                <span class="badge">4</span>
+                <span class="badge"><?=count($food)?></span>
             </a>
+            <br />
             <table class="table table-condensed table-striped table-bordered table-hover">
               <thead>
                 <tr>
@@ -71,7 +76,13 @@
               <tbody>
                 <?php foreach($food as $i => $meal): ?>
                 <tr>
-                  <th scope="row"><?=$i?></th>
+                  <th scope="row">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a href="" titile="View" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="edit.php?id=<?=$i?>" titile="Edit" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="delete.php?id=<?=$i?>" titile="Delete" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                  </div>
+                  </th>
                   <td><?=$meal['Name']?></td>
                   <td><?=date("M d Y  h:i:sa", $meal['Time'])?></td>
                   <td><?=$meal['Callories']?></td>
