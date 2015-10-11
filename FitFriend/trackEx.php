@@ -1,3 +1,25 @@
+<?php
+session_start();
+    $name = 'Andrew Haaland';
+    $message = "Welcome $name";
+    
+    $person = array( 'Name' => $name, 'Age' => 20, CallorieGoal => 2000 );
+    
+    $exercise = $_SESSION['exercise'];
+    if(!$exercise){
+      $_SESSION['exercise']=$exercise = array(
+        array( 'Name' => 'Ride bike', 'Time' => '10/11/15', Callories => 400 ),
+        array( 'Name' => 'Walk', 'Time' => '10/11/15', Callories => 100 ),
+        );
+    }
+    
+
+    $total = 0;
+    foreach ($exercise as $workout) {
+        $total += $workout['Callories'];
+    }
+    
+?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -38,8 +60,46 @@
         </div>
         </nav>
         <div class="container">
-            <h1>FitFriend for Web Programming fall 2015 at SUNY New Paltz!</h1>
-            <p>FitFriend was developed for a Web Programming class at SUNY New Paltz by <a href="http://andrewhaaland.com/">Andrew Haaland.</a></p>
+            <h1>Your Exercise!</h1>
+            <div class="col-xs-12">
+              <div>
+            <a href="editEx.php" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i>
+                Add Exercise
+            </a>
+           <!-- DEL ALL <a href="delete.php?id=<?=count($food)+1?>" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>
+                Delete All
+                <span class="badge"><?=count($food)?></span>
+            </a>-->
+            </div>
+            <br>
+      <table class="table table-condensed table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Time</th>
+                  <th>Calories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach($exercise as $i => $workout): ?>
+                <tr>
+                  <th scope="row">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a href="viewEx.php?id=<?=$i?>" titile="View" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="editEx.php?id=<?=$i?>" titile="Edit" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="deleteEx.php?id=<?=$i?>" titile="Delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                  </div>
+                  </th>
+                  <td><?=$workout['Name']?></td>
+                  <td><?=$workout['Time']?></td>
+                  <td><?=$workout['Callories']?></td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table> 
         </div>
         <!--MODAL LOGIN-->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -51,7 +111,6 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-             
             <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">

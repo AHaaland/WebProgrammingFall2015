@@ -1,3 +1,26 @@
+<?php
+session_start();
+    $name = 'Andrew Haaland';
+    $message = "Welcome $name";
+    
+    $person = array( 'Name' => $name, 'Age' => 20, CallorieGoal => 2000 );
+    
+    $food = $_SESSION['food'];
+    if(!$food){
+      $_SESSION['food']=$food = array(
+        array( 'Name' => 'Breakfast', 'Time' => '10/11/15', Callories => 400 ),
+        array( 'Name' => 'Lunch', 'Time' => '10/11/15', Callories => 800 ),
+        array( 'Name' => 'Snack', 'Time' => '10/11/15', Callories => 400 ),
+        array( 'Name' => 'Dinner', 'Time' =>'10/11/15', Callories => 400 ),
+        );
+    }
+
+    $total = 0;
+    foreach ($food as $meal) {
+        $total += $meal['Callories'];
+    }
+    
+?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -26,6 +49,8 @@
           <ul class="nav navbar-nav">
             <li ><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="track.php">Track Food</a></li>
+             <li><a href="trackEx.php">Track Exercise</a></li>
           </ul>
           <div class="navbar-right">
               <p class="navbar-text ">Hello, Guest!</p>
@@ -37,48 +62,45 @@
         </nav>
         <div class="container">
             <h1>Your Food!</h1>
-            <Button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModalFood"><i class ="glyphicon glyphicon-plus"></i>Add Food!</Button>
-            <Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModalFood"><i class ="glyphicon glyphicon-trash"></i> Delete Food!</Button>
-            <table class="table table-striped table-hover">
- 			<thead>
- 				<tr>
-                  <th>Food</th>
-                  <th>Calories</th>
-                  <th>Fat (g)</th>
-                  <th>Carbs (g)</th>
-                  <th>Fiber (g)</th>
+            <div class="col-xs-12">
+              <div>
+            <a href="edit.php" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i>
+                Add Food
+            </a>
+           <!-- DEL ALL <a href="delete.php?id=<?=count($food)+1?>" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>
+                Delete All
+                <span class="badge"><?=count($food)?></span>
+            </a>-->
+            </div>
+            <br>
+      <table class="table table-condensed table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
                   <th>Time</th>
+                  <th>Calories</th>
                 </tr>
- 			</thead>
- 			<tbody>
- 				<tr>
- 				    <th>Name</th>
- 				    <th>cals</th>
- 				    <th>fat</th>
- 				    <th>carbs</th>
- 				    <th>fiber</th>
- 				    <th>date</th>
- 				</tr>
- 			</tbody>
-		</table>
-		<Button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModalEx"><i class ="glyphicon glyphicon-plus"></i>Add Exercise!</Button>
-        <Button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModalEx"><i class ="glyphicon glyphicon-trash"></i> Delete Exercise!</Button>
-		<table class="table table-striped table-hover">
- 			<thead>
- 				<tr>
-                  <th>Type of Exercise</th>
-                  <th>Calories Burned </th>
-                  <th>Date</th>
+              </thead>
+              <tbody>
+                <?php foreach($food as $i => $meal): ?>
+                <tr>
+                  <th scope="row">
+                  <div class="btn-group" role="group" aria-label="...">
+                    <a href="view.php?id=<?=$i?>" titile="View" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="edit.php?id=<?=$i?>" titile="Edit" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="delete.php?id=<?=$i?>" titile="Delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                  </div>
+                  </th>
+                  <td><?=$meal['Name']?></td>
+                  <td><?=$meal['Time']?></td>
+                  <td><?=$meal['Callories']?></td>
                 </tr>
- 			</thead>
- 			<tbody>
- 				<tr>
- 				    <th>Walking</th>
- 				    <th>100</th>
- 				    <th>9/19/15</th>
- 				</tr>
- 			</tbody>
-		</table>
+                <?php endforeach; ?>
+              </tbody>
+            </table> 
         </div>
         <!--MODAL LOGIN-->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -112,136 +134,6 @@
       </div>
     </div>
     <!--MODAL LOGIN-->
-    <!--MODAL ADD Food-->
-     <div class="modal fade" id="addModalFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Food!</h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal">
-            <div class="form-group">
-            <label for="inputFood" class="col-sm-2 control-label">Food Name:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtFood" placeholder="Food Name">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputCals" class="col-sm-2 control-label">Calories:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtCals" placeholder="Calories">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputFat" class="col-sm-2 control-label">Fat(g):</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtFat" placeholder="Fat">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputCarbs" class="col-sm-2 control-label">Carbohydrates(g):</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtCarbs" placeholder="Carbohydrates">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputFiber" class="col-sm-2 control-label">Fiber(g):</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtFiber" placeholder="Fiber">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputTime" class="col-sm-2 control-label">Date and time:</label>
-            <div class="col-sm-10">
-              <input type="Date" class="form-control" id="txtDT" placeholder="Date and Time">
-            </div>
-          </div>
-        </form>
-         </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <Button type="button" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i> Add</Button>
-              </div>
-        </div>
-      </div>
-    </div>
-    <!--MODAL ADD Food-->
-    <!--MODAL RM Food-->
-    <div class="modal fade" id="delModalFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete item</h4>
-          </div>
-          <div class="modal-body">
-            ...
-         </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-        </div>
-      </div>
-    </div>
-     <!--MODAL RM Food-->
-     <!--MODAL ADD Food-->
-     <div class="modal fade" id="addModalEx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Exercise!</h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal">
-          <div class="form-group">
-            <label for="inputTime" class="col-sm-2 control-label">Date and time:</label>
-            <div class="col-sm-10">
-              <input type="Date" class="form-control" id="txtDT" placeholder="Date and Time">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputType" class="col-sm-2 control-label">Type of Exercise:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtTp" placeholder="Type of Exercise">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputType" class="col-sm-2 control-label">Calories Burned:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="txtCalBurn" placeholder="Calories Burned">
-            </div>
-          </div>
-        </form>
-         </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <Button type="button" class="btn btn-success"><i class ="glyphicon glyphicon-plus"></i> Add</Button>
-              </div>
-        </div>
-      </div>
-    </div>
-    <!--MODAL ADD Food-->
-         <!--MODAL RM Food-->
-    <div class="modal fade" id="delModalEx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete item</h4>
-          </div>
-          <div class="modal-body">
-            ...
-         </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-        </div>
-      </div>
-    </div>
-     <!--MODAL RM Food-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <footer>

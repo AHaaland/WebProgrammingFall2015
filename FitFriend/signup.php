@@ -26,6 +26,8 @@
           <ul class="nav navbar-nav">
             <li ><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="track.php">Track Food</a></li>
+             <li><a href="trackEx.php">Track Exercise</a></li>
           </ul>
           <div class="navbar-right">
               <p class="navbar-text ">Hello, Guest!</p>

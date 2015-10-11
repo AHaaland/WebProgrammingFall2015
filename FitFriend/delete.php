@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+  $food = $_SESSION['food'];
+  if($_POST){
+    unset($food[$_POST['id']]);
+    $_SESSION['food'] = $food;
+    header('Location: track.php');
+  }
+  
+  $meal = $food[$_REQUEST['id']];
+
+?>
+<!DOCTYPE html>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -7,7 +21,10 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>FitFriend</title>
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" type="text/css" />
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -37,11 +54,23 @@
           </div>
         </div>
         </nav>
-        <div class="container">
-            <h1>FitFriend for Web Programming fall 2015 at SUNY New Paltz!</h1>
-            <p>FitFriend was developed for a Web Programming class at SUNY New Paltz by <a href="http://andrewhaaland.com/">Andrew Haaland.</a></p>
+  <br>
+  <body>
+    <div class="container">
+        <div class="page-header">
+          <h1>Food intake <small>Delete a meal</small></h1>
         </div>
-        <!--MODAL LOGIN-->
+        <form class="form-horizontal" action="" method="post">
+        <div class='alert alert-danger aler-block' id="myAlert">
+          <h3>Are you sure you want to delete <?=$meal['Name']?>?<h3>
+          <input type="submit" value="Delete" class="btn btn-danger" />
+          <input type="hidden" name="id" value="<?=$_REQUEST['id']?>"/>
+          </div>
+        
+        </form>
+    </div>
+
+ <!--MODAL LOGIN-->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -51,7 +80,6 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-             
             <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
@@ -80,6 +108,6 @@
             <div class="text-center containter">
                 <h5>©2015 Andrew Haaland All rights reserved.</h5>
             </div>
-        </footer>
-    </body>
-</html>
+ </footer>
+ </body>
+ </html>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+  $food = $_SESSION['food'];
+  if($_POST){
+    $_SESSION['food'] = $food;
+    header('Location: track.php');
+  }
+  $meal = $food[$_REQUEST['id']];
+
+?>
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -37,11 +48,24 @@
           </div>
         </div>
         </nav>
-        <div class="container">
-            <h1>FitFriend for Web Programming fall 2015 at SUNY New Paltz!</h1>
-            <p>FitFriend was developed for a Web Programming class at SUNY New Paltz by <a href="http://andrewhaaland.com/">Andrew Haaland.</a></p>
-        </div>
-        <!--MODAL LOGIN-->
+        <br>
+<div class="container">
+    <div class="panel panel-success">
+                <div class="panel-heading">Your Data</div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt>
+                        <dd><?=$meal['Name']?></dd>
+                        <dt>Calories</dt>
+                        <dd><?=$meal['Callories']?></dd>
+                        <dt>Time food was Eaten</dt>
+                        <dd><?=$meal['Time']?></dd>
+                    </dl>
+                </div>
+            </div>
+</div>
+
+<!--MODAL LOGIN-->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -51,7 +75,6 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-             
             <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
