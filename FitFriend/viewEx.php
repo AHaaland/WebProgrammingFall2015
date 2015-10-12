@@ -58,8 +58,10 @@ session_start();
                         <dd><?=$workout['Name']?></dd>
                         <dt>Calories Burned</dt>
                         <dd><?=$workout['Callories']?></dd>
-                        <dt>Time you worked out?/dt>
+                        <dt>When you worked out?</dt>
                         <dd><?=$workout['Time']?></dd>
+                        <dt>Time you worked out?</dt>
+                        <dd><?=$workout['Duration']?></dd>
                     </dl>
                 </div>
             </div>

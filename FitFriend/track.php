@@ -8,10 +8,10 @@ session_start();
     $food = $_SESSION['food'];
     if(!$food){
       $_SESSION['food']=$food = array(
-        array( 'Name' => 'Breakfast', 'Time' => '10/11/15', Callories => 400 ),
-        array( 'Name' => 'Lunch', 'Time' => '10/11/15', Callories => 800 ),
-        array( 'Name' => 'Snack', 'Time' => '10/11/15', Callories => 400 ),
-        array( 'Name' => 'Dinner', 'Time' =>'10/11/15', Callories => 400 ),
+        array( 'Name' => 'Breakfast', 'Time' => '10/11/15', 'Callories' => 400 ),
+        array( 'Name' => 'Lunch', 'Time' => '10/11/15', 'Callories' => 800 ),
+        array( 'Name' => 'Snack', 'Time' => '10/11/15', 'Callories' => 400 ),
+        array( 'Name' => 'Dinner', 'Time' =>'10/11/15', 'Callories' => 400 ),
         );
     }
 

@@ -92,6 +92,12 @@ session_start();
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label" for="txtDur">When did you exercise?</label>
+            <div class="col-sm-10">
+                  <input type="text" class="form-control" id="txtDur" name="Duration" placeholder="Duration of workout"  value="<?=$workout['Duration']?>">
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-success" id="submit">Add</button>
             </div>
