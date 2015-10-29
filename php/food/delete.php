@@ -1,3 +1,5 @@
+CREATE USER 'haalanda1'@'%' IDENTIFIED BY 'bbb';
+GRANT ALL PERMISSIONS 
 <?php
 session_start();
 
