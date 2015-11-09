@@ -69,6 +69,3 @@ switch ($format) {
 		include __DIR__ . "/../Views/shared/_Template.php";		
 		break;
 }
-
-
-

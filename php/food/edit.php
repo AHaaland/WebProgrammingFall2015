@@ -1,5 +1,6 @@
 <?php
 session_start();
+
   $food = $_SESSION['food'];
   if($_POST){
     if(isset($_GET['id'])){
