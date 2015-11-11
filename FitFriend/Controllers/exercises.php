@@ -1,5 +1,5 @@
 <?php
-    include_once '../Model/person.php';
+    include_once '../Model/exercise.php';
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
 $method = $_SERVER['REQUEST_METHOD'];
@@ -8,14 +8,14 @@ $view 	= null;
 
 switch ($action . '_' . $method) {
 	case 'create_GET':
-		$model = Person::Blank();
+		$model = Exercise::Blank();
 		$view = "persons/edit.php";
 		break;
 	case 'save_POST':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
-			$errors = Person::Validate($_REQUEST);
+			$errors = Exercise::Validate($_REQUEST);
 			if(!$errors){
-				$errors = Person::Save($_REQUEST);
+				$errors = Exercise::Save($_REQUEST);
 			}
 			
 			if(!$errors){
@@ -28,35 +28,35 @@ switch ($action . '_' . $method) {
 			}else{
 				//my_print($errors);
 				$model = $_REQUEST;
-				$view = "persons/edit.php";		
+				$view = "exercises/edit.php";		
 			}
 			break;
 	case 'edit_GET':
-		$model = Person::Get($_REQUEST['id']);
-		$view = "persons/edit.php";		
+		$model = Exercise::Get($_REQUEST['id']);
+		$view = "exercises/edit.php";		
 		break;
 	case 'delete_GET':
-		$model = Person::Get($_REQUEST['id']);
-		$view = "persons/delete.php";		
+		$model = Exercise::Get($_REQUEST['id']);
+		$view = "exercises/delete.php";		
 		break;
 	case 'delete_POST':
-		$errors = Person::Delete($_REQUEST['id']);
+		$errors = Exercise::Delete($_REQUEST['id']);
 		if($errors){
-				$model = Person::Get($_REQUEST['id']);
-				$view = "persons/delete.php";
+				$model = Exercise::Get($_REQUEST['id']);
+				$view = "exercises/delete.php";
 		}else{
 				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
 				die();			
 		}
 		break;
 	case 'search_GET':
-		$model = Person::Search($_REQUEST['q']);
-		$view = 'persons/index.php';		
+		$model = Exercise::Search($_REQUEST['q']);
+		$view = 'exercises/indexEx.php';		
 		break;
 	case 'index_GET':
 	default:
-		$model = Person::Get();
-		$view = 'persons/index.php';		
+		$model = Exercise::Get();
+		$view = 'persons/indexEx.php';		
 		break;
 }
 

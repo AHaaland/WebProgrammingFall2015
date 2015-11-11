@@ -1,5 +1,5 @@
 <?php
-    include_once '../Model/person.php';
+    include_once '../Model/food.php';
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
 $method = $_SERVER['REQUEST_METHOD'];
@@ -8,14 +8,14 @@ $view 	= null;
 
 switch ($action . '_' . $method) {
 	case 'create_GET':
-		$model = Person::Blank();
-		$view = "persons/edit.php";
+		$model = Food::Blank();
+		$view = "persons/editFo.php";
 		break;
 	case 'save_POST':
 			$sub_action = empty($_REQUEST['id']) ? 'created' : 'updated';
-			$errors = Person::Validate($_REQUEST);
+			$errors = Food::Validate($_REQUEST);
 			if(!$errors){
-				$errors = Person::Save($_REQUEST);
+				$errors = Food::Save($_REQUEST);
 			}
 			
 			if(!$errors){
@@ -32,17 +32,17 @@ switch ($action . '_' . $method) {
 			}
 			break;
 	case 'edit_GET':
-		$model = Person::Get($_REQUEST['id']);
-		$view = "persons/edit.php";		
+		$model = Food::Get($_REQUEST['id']);
+		$view = "persons/editFo.php";		
 		break;
 	case 'delete_GET':
-		$model = Person::Get($_REQUEST['id']);
+		$model = Food::Get($_REQUEST['id']);
 		$view = "persons/delete.php";		
 		break;
 	case 'delete_POST':
-		$errors = Person::Delete($_REQUEST['id']);
+		$errors = Food::Delete($_REQUEST['id']);
 		if($errors){
-				$model = Person::Get($_REQUEST['id']);
+				$model = Food::Get($_REQUEST['id']);
 				$view = "persons/delete.php";
 		}else{
 				header("Location: ?sub_action=$sub_action&id=$_REQUEST[id]");
@@ -50,13 +50,13 @@ switch ($action . '_' . $method) {
 		}
 		break;
 	case 'search_GET':
-		$model = Person::Search($_REQUEST['q']);
-		$view = 'persons/index.php';		
+		$model = Food::Search($_REQUEST['q']);
+		$view = 'persons/indexFo.php';		
 		break;
 	case 'index_GET':
 	default:
-		$model = Person::Get();
-		$view = 'persons/index.php';		
+		$model = Food::Get();
+		$view = 'persons/indexFo.php';		
 		break;
 }
 
