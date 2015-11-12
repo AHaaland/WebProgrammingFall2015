@@ -34,7 +34,7 @@ class Food {
 
 
 
-		static public function Validate($row)
+		static public function Valdate($row)
 		{
 			$errors = array();
 			if(empty($row['Calories'])) $errors['Calories'] = "is required";
