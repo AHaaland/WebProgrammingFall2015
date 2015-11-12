@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>FitFriend</title>
+        <!-- Bootstrap -->
+        <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" type="text/css" />
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-static-top nav-no-space">
+        <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">FitFriend <span class="glyphicon glyphicon-cutlery"></span> </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ><a href="index.php">Home</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="track.php">Track Food</a></li>
+             <li><a href="trackEx.php">Track Exercise</a></li>
+          </ul>
+          <div class="navbar-right">
+              <p class="navbar-text ">Hello, Guest!</p>
+               <Button type="button" class="btn btn-primary navbar-btn pull-left" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
+              <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
+          </div>
+          </div>
+        </div>
+        </nav>
+        <br>
+    <div class="container">
+
+        <div class="page-header">
+          <h1>Food Intake <small>Record your daily meals</small></h1>
+        </div>
+        <form class="form-horizontal" action="" method="post" >
+          <div class='alert' style="display: none" id="myAlert">
+            <button type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3></h3>  
+           <div id="view"></div>
+            
+    </div>
+    </div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var editTemplate = Handlebars.compile($("#edit-tmpl").html());
+            var indexTemplate = Handlebars.compile($("#index-tmpl").html());
+            $("#view").on("click", ".ajax", function(){
+                $.get(this.href).then(function(data){
+                    $("#myDialog .modal-content").html(data);
+                    $("#myDialog").modal('show');
+                });
+                return false;
+            });
+            $("#view").on("click", ".edit", function(){
+                var $self = $(this);
+                $.getJSON(this.href).then(function(data){
+                    var html = editTemplate(data);
+                    var $tr = $self.closest("tr").after(html).hide()
+                });
+                return false;
+            });
+            $.getJSON("/person").then(function(data){
+                    var html = indexTemplate({rows: data});
+                    $("#view").html(html);
+            });
+        });
+    </script>
+    <script type="text/template" id="edit-tmpl" >
+        <tr>
+           <td><input type="text" name="Name" class="form-control" placeholder="Name" value="{{Name}}" /></td>
+           <td><input type="text" name="Birthday" class="form-control" placeholder="Birthday" value="{{Birthday}}" /></td>
+           <td>
+             <input type="submit" value="Submit" class="btn btn-primary"/>
+             <input type="hidden" name="id" value="{{id}}" /> 
+           </td>
+        </tr>
+    </script>
+    
+    <script type="text/template" id="index-tmpl" >
+        <a href="/persons/create" class="btn btn-success ajax">
+            <i class="glyphicon glyphicon-plus"></i>
+            New Record
+        </a>
+        <a href="#" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            Delete All
+            <span class="badge">{{rows.length}}</span>
+        </a>
+        <br />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each rows}}
+                    <tr>
+                          <th scope="row">
+                            <div class="btn-group" role="group" aria-label="...">
+                              <a href="" title="View" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
+                              <a href="/person/{{id}}" title="Edit" class="btn btn-default btn-xs edit"><i class="glyphicon glyphicon-edit"></i></a>
+                              <a href="/person/{{id}}" title="Delete" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-trash"></i></a>
+                            </div>
+                          </th>
+                        <td>{{Name}}</td>
+                        <td>{{Birthday}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </script>
+    
+  </body>
+  <footer>
+            <div class="text-center containter">
+                <h5>©2015 Andrew Haaland All rights reserved.</h5>
+            </div>
+        </footer>
+</html>
