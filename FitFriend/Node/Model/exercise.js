@@ -29,13 +29,7 @@ module.exports =  {
           conn.end();
         });        
     },
-    validate: function(row){
-      var errors = {};
-      
-      if(!row.Name) errors.Name = "is required"; 
-      
-      return errors.length ? errors : false;
-    }
+
 };  
 
 function GetConnection(){

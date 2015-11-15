@@ -76,7 +76,7 @@
                 });
                 return false;
             });
-            $.getJSON("person").then(function(data){
+            $.getJSON("exercise").then(function(data){
                 var html = indexTemplate({rows: data});
                 $("#view").html(html);
             });
@@ -99,7 +99,10 @@
             <thead>
                 <tr>
                     <th>Actions</th>
-                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Calories Burned</th>
+                    <th>Duration</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,11 +111,14 @@
                           <th scope="row">
                             <div class="btn-group" role="group" aria-label="...">
                               <a href="" title="View" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
-                              <a href="/person/{{id}}" title="Edit" class="btn btn-default btn-xs edit"><i class="glyphicon glyphicon-edit"></i></a>
+                              <a href="/exercise/{{id}}" title="Edit" class="btn btn-default btn-xs edit"><i class="glyphicon glyphicon-edit"></i></a>
                               <a href="?action=delete&id={{id}}" title="Delete" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                           </th>
-                        <td>{{name}}</td>
+                        <td>{{Type}}</td>
+                        <td>{{CaloriesBurned}}</td>
+                        <td>{{Duration}}</td>
+                        <td>{{Date}}</td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -121,12 +127,15 @@
 
 <script type="text/template" id="edit-tmpl" >
     <tr>
-       <td><input type="text" name="Name" class="form-control" placeholder="Name" value="{{name}}" /></td>
+       <td><input type="text" name="Type" class="form-control" placeholder="Type of Exercise" value="{{Type}}" /></td>
+       <td><input type="text" name="Cals" class="form-control" placeholder="Calories Burned" value="{{CaloriesBurned}}" /></td>
+       <td><input type="text" name="Duration" class="form-control" placeholder="How Long You Exercised" value="{{Duration}}" /></td>
+       <td><input type="text" name="Date" class="form-control" placeholder="Date" value="{{Date}}" /></td>
        <td>
          <input type="submit" value="Submit" class="btn btn-primary"/>
          <input type="hidden" name="id" value="{{id}}" /> 
        </td>
     </tr>
 </script>
-  </body>
+ </body>
 </html>

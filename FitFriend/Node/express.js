@@ -1,8 +1,12 @@
 var express = require('express'),
     app = express(),
     person = require("./Model/person");
+    food = require("./Model/food");
+    exercise = require("./Model/exercise");
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/food'));
+app.use(express.static(__dirname + '/public/exercise'));
 app.get("/person", function(req, res){
   person.get(null, function(rows){
     res.send(rows);
@@ -15,24 +19,24 @@ app.get("/person", function(req, res){
   })
 });
 app.get("/food", function(req, res){
-  person.get(null, function(rows){
+  food.get(null, function(rows){
     res.send(rows);
   })
     
 })
 .get("/food/:id", function(req, res){
-  person.get(req.params.id, function(rows){
+  food.get(req.params.id, function(rows){
     res.send(rows[0]);
   })
 });
 app.get("/exercise", function(req, res){
-  person.get(null, function(rows){
+  exercise.get(null, function(rows){
     res.send(rows);
   })
     
 })
 .get("/exercise/:id", function(req, res){
-  person.get(req.params.id, function(rows){
+  exercise.get(req.params.id, function(rows){
     res.send(rows[0]);
   })
 });
