@@ -100,7 +100,8 @@
                 <tr>
                     <th>Actions</th>
                     <th>Name</th>
-                    <th>Birthday</th>
+                    <th>Calories</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -114,7 +115,8 @@
                             </div>
                           </th>
                         <td>{{Name}}</td>
-                        <td>{{Birthday}}</td>
+                        <td>{{Calories}}</td>
+                        <td>{{Date}}</td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -124,7 +126,8 @@
 <script type="text/template" id="edit-tmpl" >
     <tr>
        <td><input type="text" name="Name" class="form-control" placeholder="Name" value="{{Name}}" /></td>
-       <td><input type="text" name="Birthday" class="form-control" placeholder="Birthday" value="{{Birthday}}" /></td>
+       <td><input type="text" name="Calories" class="form-control" placeholder="Calories" value="{{Calories}}" /></td>
+       <td><input type="text" name="Date" class="form-control" placeholder="Date" value="{{Date}}" /></td>
        <td>
          <input type="submit" value="Submit" class="btn btn-primary"/>
          <input type="hidden" name="id" value="{{id}}" /> 
