@@ -18,26 +18,4 @@ app.get("/person", function(req, res){
     res.send(rows[0]);
   })
 });
-app.get("/food", function(req, res){
-  food.get(null, function(rows){
-    res.send(rows);
-  })
-    
-})
-.get("/food/:id", function(req, res){
-  food.get(req.params.id, function(rows){
-    res.send(rows[0]);
-  })
-});
-app.get("/exercise", function(req, res){
-  exercise.get(null, function(rows){
-    res.send(rows);
-  })
-    
-})
-.get("/exercise/:id", function(req, res){
-  exercise.get(req.params.id, function(rows){
-    res.send(rows[0]);
-  })
-});
 app.listen(process.env.PORT);
