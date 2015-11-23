@@ -1,0 +1,23 @@
+{
+  "name": "FitFriend_Node_1",
+  "version": "0.1.0",
+  "description": "<h1>Web Programming 2015 Git Hub Repo<h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/N02762252/WebProgrammingFall2015.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N02762252/WebProgrammingFall2015/issues"
+  },
+  "homepage": "https://github.com/N02762252/WebProgrammingFall2015",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mysql": "^2.9.0"
+  }
+}
