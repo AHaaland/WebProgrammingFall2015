@@ -26,14 +26,14 @@ module.exports =  {
         //  TODO Sanitize
         if (row.id) {
 				  sql = " Update FitFriend_Exercises "
-							+ " Set Name= ? "
+							+ " Set Type= ? "
 							+ "Set CaloriesBurned=? "
 							+ "Set Date =? "
 							+ "Set Duration =? "
 						  + " WHERE id = ? ";
 			  }else{
 				  sql = "INSERT INTO FitFriend_Exercises "
-						  + " (Name, CaloriesBurned, Date, Duration, created_at, id) "
+						  + " (Type, CaloriesBurned, Date, Duration, created_at, id) "
 						  + "VALUES (?, ?, ?, ?, Now(), ?) ";				
 			  }
 

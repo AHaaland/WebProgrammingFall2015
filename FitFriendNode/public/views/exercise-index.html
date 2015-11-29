@@ -27,15 +27,16 @@
                               <a ng-click="vm.delete(row, $index)" title="Delete" class="btn btn-default btn-xs delete"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                           </th>
-                        <td>{{row.Name}}</td>
+                        <td>{{row.Type}}</td>
                         <td>{{row.CaloriesBurned}}</td>
                         <td>{{row.Duration}}</td>
                         <td>{{row.Date}}</td>
                         <td ng-if-end></td>
                         
-                        <td ng-if-start="row.isEditing"><input type="text" name="Name" class="form-control" placeholder="Name" ng-model="row.Name" /></td>
-                        <td ng-if-start="row.isEditing"><input type="text" name="Calories" class="form-control" placeholder="Calories" ng-model="row.Calories" /></td>
-                        <td ng-if-start="row.isEditing"><input type="text" name="When" class="form-control" placeholder="When you ate" ng-model="row.When" /></td>
+                        <td ng-if-start="row.isEditing"><input type="text" name="Type" class="form-control" placeholder="Type" ng-model="row.Type" /></td>
+                        <td><input type="text" name="Calories" class="form-control" placeholder="Calories" ng-model="row.CaloriesBurned" /></td>
+                        <td><input type="text" name="When" class="form-control" placeholder="When you exercised" ng-model="row.Date" /></td>
+                        <td><input type="text" name="Duration" class="form-control" placeholder="How long you exercised" ng-model="row.Duration" /></td>
                         <td ng-if-end>
                             <input type="button" value="Submit" class="btn btn-primary submit" ng-click="vm.save(row, $index)"/>
                         </td>
