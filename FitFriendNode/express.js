@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var person = require("./Model/person");
 var food = require("./Model/food");
 var exercise = require("./Model/exercise");
+var unirest = require('unirest');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -114,6 +115,15 @@ app.get("/exercise", function(req, res){
     res.send(row);
   })
 })
+.get("/food/search/:term", function(req, res){
+    unirest.get("https://nutritionix-api.p.mashape.com/v1_1/search/" + req.params.term + "?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat")
+    .header("X-Mashape-Key", "67eslKyiOPmsh641BeiaTtqNVZb3p16bv38jsn0cCGxhX0cpCM")
+    .header("Accept", "application/json")
+    .end(function (result) {
+        res.send(result.body);
+    });
+    
+})
 .delete("/exercise/:id", function(req, res){
   
   exercise.delete(req.params.id, function(err, rows){
@@ -124,6 +134,12 @@ app.get("/exercise", function(req, res){
       }
   })
   
+})
+.get("/user/:access_token", function(req, res){
+    unirest.get("https://graph.facebook.com/me?access_token=" + req.params.access_token + "&fields=id,name,email")
+    .end(function (result) {
+        res.send(result.body);
+    });
 })
 
 

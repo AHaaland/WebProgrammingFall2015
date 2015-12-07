@@ -8,33 +8,50 @@
             <span class="badge">{{vm.rows.length}}</span>
         </a>
         <br />
-        <table class="table table-striped">
+<table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Actions</th>
                     <th>Name</th>
                     <th>Calories</th>
-                    <th>Time Eaten</th>
+                    <th>Fat</th>
+                    <th>Carbs</th>
+                    <th>Fiber</th>
+                    <th>Time</th>
+                    <th>User</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                     <tr ng-repeat="row in vm.rows">
-                          <th ng-if-start="!row.isEditing" scope="row">
+                        <td ng-if-start="!row.isEditing">{{row.Name}}</td>
+                        <td >{{row.Calories}}</td>
+                        <td >{{row.Fat}}</td>
+                        <td >{{row.Carbs}}</td>
+                        <td >{{row.Fiber}}</td>
+                        <td >{{row.When}}</td>
+                        <td >{{row.Users_id}}</td>
+                          <th ng-if-end scope="row">
                             <div class="btn-group" role="group" aria-label="...">
                               <a href="" title="View" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
                               <a ng-click="vm.edit(row, $index)" title="Edit" class="btn btn-default btn-xs edit"><i class="glyphicon glyphicon-edit"></i></a>
                               <a ng-click="vm.delete(row, $index)" title="Delete" class="btn btn-default btn-xs delete"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                           </th>
-                        <td>{{row.Name}}</td>
-                        <td>{{row.Calories}}</td>
-                        <td ng-if-end>{{row.When}}</td>
                         
-                        <td ng-if-start="row.isEditing"><input type="text" name="Name" class="form-control" placeholder="Name" ng-model="row.Name" /></td>
+                        <td ng-if-start="row.isEditing">
+                            <input type="text" name="Name" class="form-control" placeholder="Name" ng-model="row.Name" />
+                        </td>
                         <td><input type="text" name="Calories" class="form-control" placeholder="Calories" ng-model="row.Calories" /></td>
-                        <td><input type="text" name="When" class="form-control" placeholder="When you ate" ng-model="row.When" /></td>
+                        <td><input type="text" name="Fat" class="form-control" placeholder="Fat" ng-model="row.Fat" /></td>
+                        <td><input type="text" name="Carbs" class="form-control" placeholder="Carbs" ng-model="row.Carbs" /></td>
+                        <td><input type="text" name="Fiber" class="form-control" placeholder="Fiber" ng-model="row.Fiber" /></td>
+                        <td><input type="text" name="Time" class="form-control date-time" placeholder="Time" ng-model="row.When" /></td>
+                        <td>
+                            <select ng-options="option.id as option.Name for option in vm.persons" ng-model="row.id" class="form-control"></select>
+                         </td>
                         <td ng-if-end>
-                            <input type="button" value="Submit" class="btn btn-primary submit" ng-click="vm.save(row, $index)"/>
+                            <input type="button" value="Save" class="btn btn-primary btn-sm submit" ng-click="vm.save(row, $index)"/>
+                            <input type="button" value="Cancel" class="btn btn-default btn-sm submit" ng-click="row.isEditing = false"/>
                         </td>
                        
                        

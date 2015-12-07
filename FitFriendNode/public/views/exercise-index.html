@@ -16,6 +16,7 @@
                     <th>Calories Burned</th>
                     <th>Duration</th>
                     <th>When You Exercised</th>
+                    <th>User</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,15 +32,23 @@
                         <td>{{row.CaloriesBurned}}</td>
                         <td>{{row.Duration}}</td>
                         <td>{{row.Date}}</td>
+                        <td>{{row.Users_id}}</td>
                         <td ng-if-end></td>
                         
                         <td ng-if-start="row.isEditing"><input type="text" name="Type" class="form-control" placeholder="Type" ng-model="row.Type" /></td>
+                        
                         <td><input type="text" name="Calories" class="form-control" placeholder="Calories" ng-model="row.CaloriesBurned" /></td>
                         <td><input type="text" name="When" class="form-control" placeholder="When you exercised" ng-model="row.Date" /></td>
                         <td><input type="text" name="Duration" class="form-control" placeholder="How long you exercised" ng-model="row.Duration" /></td>
+                        <td>
+                            <select ng-options="option.id as option.Name for option in vm.persons" ng-model="row.UserId" class="form-control"></select>
+                         </td>
+                        <td>
+                        
                         <td ng-if-end>
                             <input type="button" value="Submit" class="btn btn-primary submit" ng-click="vm.save(row, $index)"/>
                         </td>
+                        
                        
                        
                     </tr>

@@ -21,7 +21,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">FitFriend <span class="glyphicon glyphicon-cutlery"></span> </a>
+          <a class="navbar-brand" href="index.html">FitFriend <span class="glyphicon glyphicon-cutlery"></span> </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
@@ -30,9 +30,14 @@
             <li><a href="#/exercise">Track Exercise</a></li>
           </ul>
           <div class="navbar-right">
-              <p class="navbar-text ">Hello, Guest!</p>
-               <Button type="button" class="btn btn-primary navbar-btn pull-left" data-toggle="modal" data-target="#loginModal" role="login">Sign In</Button> 
-              <p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>
+              <p class="navbar-text ">Hello, </p>
+               <ul class="nav navbar-nav navbar-right">
+              <div ng-controller="user as user" ><a href="#" style="padding: 0">
+                  <img src="https://graph.facebook.com/{{user.fbUser.id}}/picture" />
+                  {{user.fbUser.name}} 
+              </a></div>
+            </ul>
+              <!--<p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>-->
           </div>
           </div>
         </div>
@@ -42,6 +47,7 @@
             <div ng-view ></div>
         </div>
     <!--      ### Tech Stuff ###      -->
+    <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-route.min.js"></script>
     <script type="text/javascript" src="directives/alert.js"></script>
@@ -65,6 +71,10 @@
               when('/food/:id', {
                 templateUrl: 'views/food-details.html',
                 controller: 'foodDetails', controllerAs: 'vm'
+              }).
+              when('/food/new', {
+                templateUrl: 'views/food-new.html',
+                controller: 'foodNew', controllerAs: 'vm'
               }).
              when('/exercise', {
                 templateUrl: 'views/exercise-index.html',
@@ -153,8 +163,45 @@
                         });
                     }
                 });
-            }}
-            )
+            }})
+            .service('facebook',function($q, $http){
+            return {
+                getUser: function(){
+                    var deferred = $q.defer();
+                    
+                    FB.init({
+                        appId      : '1495600110742547',
+                        cookie     : true,  
+                        xfbml      : true,  
+                        version    : 'v2.5' 
+                    });
+                    FB.getLoginStatus(function(response) {
+                        if(response.status === 'connected'){
+                                $http.get('/user/' + response.authResponse.accessToken).success(function(fbUser) {
+                                    deferred.resolve(fbUser);
+                                })
+                        }else{
+                            FB.login(function(response) {
+                                $http.get('/user/').then(function(fbUser) {
+                                    deferred.resolve(fbUser);
+                                })
+                                
+                            }, {scope: 'public_profile,email'});
+                        }
+                    });
+                    
+                    return deferred.promise;
+                }
+            }
+        })
+        .controller('user', function(facebook){
+            var self = this;
+            facebook.getUser().then(function(fbUser){
+                self.fbUser = fbUser;
+            });
+            self.status = "Not Checked Yet."
+        })
+            
             .controller('exercise', function($http, alert, panel){
             var self = this;
             
@@ -191,7 +238,8 @@
                         });
                     }
                 });
-            }}
+            }
+            }
             );
         
     </script>
