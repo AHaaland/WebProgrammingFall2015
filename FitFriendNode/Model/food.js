@@ -28,12 +28,15 @@ module.exports =  {
 				  sql = " Update FitFriend_Meals "
 							+ " Set Name= ? "
 							+ "Set Calories=? "
+							+ "Set Fat=? "
+							+ "Set Carbs=?"
+							+ "Set Fiber=?"
 							+ "Set When =? "
 						  + " WHERE id = ? ";
 			  }else{
 				  sql = "INSERT INTO FitFriend_Meals "
-						  + " (Name, Calories, Date, created_at, id) "
-						  + "VALUES (?, ?, ?, Now(), ?) ";				
+						  + " (Name, Calories, Fat, Carbs, Fiber, Date, created_at, user_id) "
+						  + "VALUES (?, ?, ?, ?, ?, ?, Now(),? ) ";				
 			  }
 
         conn.query(sql, [row.Name, row.id],function(err,data){

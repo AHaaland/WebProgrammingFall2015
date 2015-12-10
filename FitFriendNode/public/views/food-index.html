@@ -17,7 +17,6 @@
                     <th>Carbs</th>
                     <th>Fiber</th>
                     <th>Time</th>
-                    <th>User</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
                         <td >{{row.Carbs}}</td>
                         <td >{{row.Fiber}}</td>
                         <td >{{row.When}}</td>
-                        <td >{{row.Users_id}}</td>
                           <th ng-if-end scope="row">
                             <div class="btn-group" role="group" aria-label="...">
                               <a href="" title="View" class="btn btn-default btn-xs ajax"><i class="glyphicon glyphicon-eye-open"></i></a>
@@ -37,7 +35,6 @@
                               <a ng-click="vm.delete(row, $index)" title="Delete" class="btn btn-default btn-xs delete"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                           </th>
-                        
                         <td ng-if-start="row.isEditing">
                             <input type="text" name="Name" class="form-control" placeholder="Name" ng-model="row.Name" />
                         </td>
@@ -46,9 +43,6 @@
                         <td><input type="text" name="Carbs" class="form-control" placeholder="Carbs" ng-model="row.Carbs" /></td>
                         <td><input type="text" name="Fiber" class="form-control" placeholder="Fiber" ng-model="row.Fiber" /></td>
                         <td><input type="text" name="Time" class="form-control date-time" placeholder="Time" ng-model="row.When" /></td>
-                        <td>
-                            <select ng-options="option.id as option.Name for option in vm.persons" ng-model="row.id" class="form-control"></select>
-                         </td>
                         <td ng-if-end>
                             <input type="button" value="Save" class="btn btn-primary btn-sm submit" ng-click="vm.save(row, $index)"/>
                             <input type="button" value="Cancel" class="btn btn-default btn-sm submit" ng-click="row.isEditing = false"/>

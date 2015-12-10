@@ -2,12 +2,14 @@ var express = require('express'),
     app = express();
 var bodyParser = require('body-parser');
 var person = require("./Model/person");
+var session = require('express-session');
 var food = require("./Model/food");
 var exercise = require("./Model/exercise");
 var unirest = require('unirest');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'FitFriendtracksall' }));
 app.use(bodyParser.json());
 
 app.get("/person", function(req, res){
@@ -141,8 +143,27 @@ app.get("/exercise", function(req, res){
         res.send(result.body);
     });
 })
-
-
-
-
+.post("/login", function(req, res){
+    unirest.get("https://graph.facebook.com/me?access_token=" + req.body.access_token + "&fields=id,name,email")
+    .end(function (result) {
+        var fbUser = req.session.fbUser = JSON.parse(result.body);
+        fbUser.access_token = req.body.access_token;
+        person.get(fbUser.id, function(err, rows) {
+            if(rows && rows.length){
+                req.session.user = rows[0];
+            }else{
+                person.save({ Name: fbUser.name, fbid: fbUser.id, Birthday: '2015-01-01', TypeId: 6 }, function(err, row) {
+                    req.session.user = row;
+                })
+            }
+           res.send(result.body);
+        }, 'facebook');
+    });
+})
+.get("/fbUser", function(req, res){
+    res.send(req.session.fbUser);
+})
+.get("/user", function(req, res){
+    res.send(req.session.user);
+})
 app.listen(process.env.PORT);

@@ -32,10 +32,19 @@
           <div class="navbar-right">
               <p class="navbar-text ">Hello, </p>
                <ul class="nav navbar-nav navbar-right">
-              <div ng-controller="user as user" ><a href="#" style="padding: 0">
-                  <img src="https://graph.facebook.com/{{user.fbUser.id}}/picture" />
-                  {{user.fbUser.name}} 
-              </a></div>
+                <div ng-controller="user as user" >
+                  <div ng-if="user.fbUser">
+                      <a href="http://www.facebook.com/{{user.fbUser.id}}">
+                          <img src="https://graph.facebook.com/{{user.fbUser.id}}/picture" />
+                          {{user.fbUser.name}} 
+                      </a>
+                  </div>
+                  <div ng-if="!user.fbUser">
+                      <button ng-click="user.login()" class="btn">Login with facebook</button>
+                  </div>
+                  
+              </div>
+             </div>
             </ul>
               <!--<p class="navbar-text">or <a href="signup.php">Sign up today!</a></p>-->
           </div>
@@ -166,6 +175,15 @@
             }})
             .service('facebook',function($q, $http){
             return {
+                login: function(){
+                    var deferred = $q.defer();
+                    FB.login(function(response) {
+                        FB.api('/me', function(fbUser){
+                            deferred.resolve(fbUser);
+                        });
+                    }, {scope: 'public_profile,email'});
+                    return deferred.promise;
+                },
                 getUser: function(){
                     var deferred = $q.defer();
                     
@@ -177,16 +195,13 @@
                     });
                     FB.getLoginStatus(function(response) {
                         if(response.status === 'connected'){
-                                $http.get('/user/' + response.authResponse.accessToken).success(function(fbUser) {
+                            //response.authResponse.accessToken
+                                FB.api('/me', function(fbUser){
                                     deferred.resolve(fbUser);
-                                })
+                                });
+                                $http.post('/login', { access_token: response.authResponse.accessToken })
                         }else{
-                            FB.login(function(response) {
-                                $http.get('/user/').then(function(fbUser) {
-                                    deferred.resolve(fbUser);
-                                })
-                                
-                            }, {scope: 'public_profile,email'});
+                            
                         }
                     });
                     
@@ -200,6 +215,13 @@
                 self.fbUser = fbUser;
             });
             self.status = "Not Checked Yet."
+            
+            self.login = function(){
+                facebook.login().then(function(fbUser){
+                    self.fbUser = fbUser;
+                    
+                })
+            }
         })
             
             .controller('exercise', function($http, alert, panel){
