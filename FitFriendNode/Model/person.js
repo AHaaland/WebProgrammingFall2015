@@ -31,7 +31,7 @@ module.exports =  {
 			  }else{
 				  sql = "INSERT INTO FitFriend_Users "
 						  + " (Name,created_at, id) "
-						  + "VALUES (?, Now(), ?) ";				
+						  + "VALUES (?, Now(), persons_id) ";				
 			  }
 
         conn.query(sql, [row.Name, row.id],function(err,data){

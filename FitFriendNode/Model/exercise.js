@@ -2,11 +2,11 @@ var mysql = require("mysql");
 
 module.exports =  {
     blank: function(){ return {} },
-    get: function(id, ret){
+    get: function(id, Users_id, ret){
         var conn = GetConnection();
-        var sql = 'SELECT * FROM FitFriend_Exercises ';
+        var sql = 'SELECT * FROM FitFriend_Exercises WHERE Users_id=' + Users_id;
         if(id){
-          sql += " WHERE id = " + id;
+          sql += " AND exercise_id = " + id;
         }
         conn.query(sql, function(err,rows){
           ret(err,rows);
@@ -30,11 +30,11 @@ module.exports =  {
 							+ "Set CaloriesBurned=? "
 							+ "Set Date =? "
 							+ "Set Duration =? "
-						  + " WHERE id = ? ";
+						  + " WHERE Users_id = ? ";
 			  }else{
 				  sql = "INSERT INTO FitFriend_Exercises "
-						  + " (Type, CaloriesBurned, Date, Duration, created_at, id) "
-						  + "VALUES (?, ?, ?, ?, Now(), ?) ";				
+						  + " (Type, CaloriesBurned, Date, Duration, created_at, Users_id) "
+						  + "VALUES (?, ?, ?, ?, Now(), Users_id) ";				
 			  }
 
         conn.query(sql, [row.Name, row.id],function(err,data){
