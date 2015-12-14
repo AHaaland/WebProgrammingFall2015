@@ -22,6 +22,7 @@
                     alert.show(data.code);
                 });
             }
+            
             self.delete = function(row, index){
                 panel.show( {
                     title: "Delete a Food",
