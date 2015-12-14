@@ -117,15 +117,7 @@ app.get("/exercise", function(req, res){
     res.send(row);
   })
 })
-.get("/food/search/:term", function(req, res){
-    unirest.get("https://nutritionix-api.p.mashape.com/v1_1/search/" + req.params.term + "?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat")
-    .header("X-Mashape-Key", "67eslKyiOPmsh641BeiaTtqNVZb3p16bv38jsn0cCGxhX0cpCM")
-    .header("Accept", "application/json")
-    .end(function (result) {
-        res.send(result.body);
-    });
-    
-})
+
 .delete("/exercise/:id", function(req, res){
   
   exercise.delete(req.params.id, function(err, rows){
