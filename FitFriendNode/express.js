@@ -21,14 +21,14 @@ app.get("/person", function(req, res){
 })
 app.get("/food", function(req, res){
   
-  food.get(null, req.session.user.Users_id, function(err, rows){
+  food.get(null, function(err, rows){
     res.send(rows);
   })
     
 })
 app.get("/exercise", function(req, res){
   
-  exercise.get(null, req.session.user.Users_id, function(err, rows){
+  exercise.get(null, function(err, rows){
     res.send(rows);
   })
     
@@ -42,13 +42,13 @@ app.get("/exercise", function(req, res){
 })
 .get("/food/:id", function(req, res){
   
-  food.get(null, req.session.user.Users_id, function(err, rows){
+  food.get(req.params.id, function(err, rows){
     res.send(rows[0]);
   })
 })
 .get("/exercise/:id", function(req, res){
   
-  exercise.get(null, req.session.user.Users_id, function(err, rows){
+  exercise.get(req.params.id, function(err, rows){
     res.send(rows[0]);
   })
 })
@@ -83,7 +83,7 @@ app.get("/exercise", function(req, res){
     res.status(500).send(errors);
     return;
   }
-  food.save(req.body, req.session.user.Users_id, function(err, row){
+  food.save(req.body, function(err, row){
       if(err){
         res.status(500).send(err);
         return;
@@ -109,7 +109,7 @@ app.get("/exercise", function(req, res){
     res.status(500).send(errors);
     return;
   }
-    exercisee.save(req.body, req.session.user.Users_id, function(err, row){      
+  exercise.save(req.body, function(err, row){
       if(err){
         res.status(500).send(err);
         return;
@@ -117,7 +117,15 @@ app.get("/exercise", function(req, res){
     res.send(row);
   })
 })
-
+.get("/food/search/:term", function(req, res){
+    unirest.get("https://nutritionix-api.p.mashape.com/v1_1/search/" + req.params.term + "?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat")
+    .header("X-Mashape-Key", "67eslKyiOPmsh641BeiaTtqNVZb3p16bv38jsn0cCGxhX0cpCM")
+    .header("Accept", "application/json")
+    .end(function (result) {
+        res.send(result.body);
+    });
+    
+})
 .delete("/exercise/:id", function(req, res){
   
   exercise.delete(req.params.id, function(err, rows){
@@ -128,12 +136,6 @@ app.get("/exercise", function(req, res){
       }
   })
   
-})
-.get("/user/", function(req, res){
-    unirest.get("https://graph.facebook.com/me?access_token=" + req.params.access_token + "&fields=id,name,email")
-    .end(function (result) {
-        res.send(result.body);
-    });
 })
 .get("/user/:access_token", function(req, res){
     unirest.get("https://graph.facebook.com/me?access_token=" + req.params.access_token + "&fields=id,name,email")
@@ -150,7 +152,7 @@ app.get("/exercise", function(req, res){
             if(rows && rows.length){
                 req.session.user = rows[0];
             }else{
-                person.save({ Name: fbUser.name, fbid: fbUser.id }, function(err, row) {
+                person.save({ Name: fbUser.name, fbid: fbUser.id, Birthday: '2015-01-01', TypeId: 6 }, function(err, row) {
                     req.session.user = row;
                 })
             }

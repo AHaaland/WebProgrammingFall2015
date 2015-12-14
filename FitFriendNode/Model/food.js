@@ -2,7 +2,7 @@ var mysql = require("mysql");
 
 module.exports =  {
     blank: function(){ return {} },
-    get: function(id,Users_id, ret){
+    get: function(id, ret){
         var conn = GetConnection();
         var sql = 'SELECT * FROM FitFriend_Meals ';
         if(id){
@@ -32,11 +32,11 @@ module.exports =  {
 							+ "Set Carbs=?"
 							+ "Set Fiber=?"
 							+ "Set When =? "
-						  + " WHERE Users_id = ? ";
+						  + " WHERE id = ? ";
 			  }else{
 				  sql = "INSERT INTO FitFriend_Meals "
-						  + " (Name, Calories, Fat, Carbs, Fiber, Date, created_at, Users_id) "
-						  + "VALUES (?, ?, ?, ?, ?, ?, Now(),Users_id ) ";				
+						  + " (Name, Calories, Fat, Carbs, Fiber, Date, created_at, user_id) "
+						  + "VALUES (?, ?, ?, ?, ?, ?, Now(),? ) ";				
 			  }
 
         conn.query(sql, [row.Name, row.id],function(err,data){
