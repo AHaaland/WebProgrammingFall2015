@@ -36,7 +36,10 @@
                             </div>
                           </th>
                         <td ng-if-start="row.isEditing">
-                            <input type="text" name="Name" class="form-control" placeholder="Name" ng-model="row.Name" />
+                            <div class = 'typeahead-demo' ng-controller="TypeaheadCtrl">
+                             <pre>Model: {{selected | json}}</pre>
+                            <input type="text" name = "Name" placeholder="Name" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+                           </div>
                         </td>
                         <td><input type="text" name="Calories" class="form-control" placeholder="Calories" ng-model="row.Calories" /></td>
                         <td><input type="text" name="Fat" class="form-control" placeholder="Fat" ng-model="row.Fat" /></td>

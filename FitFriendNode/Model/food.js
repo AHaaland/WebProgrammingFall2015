@@ -13,6 +13,17 @@ module.exports =  {
           conn.end();
         });        
     },
+    getDB: function(id,searchParam,ret){
+      var conn = GetConnection();
+      var sql = "SELECT id, Name FROM FitFriend_Meals WHERE Name Like '%" + searchParam + "%'";
+      if(id){
+          sql += " WHERE id = " + id;
+        }
+        conn.query(sql, function(err,rows){
+          ret(err,rows);
+          conn.end();
+        });
+    },
     delete: function(id, ret){
         var conn = GetConnection();
         conn.query("DELETE FROM FitFriend_Meals WHERE id = " + id, function(err,rows){
